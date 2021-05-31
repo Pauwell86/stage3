@@ -26,18 +26,18 @@
                                         <color key="highlightedColor" systemColor="linkColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmk-4U-RTF">
-                                        <rect key="frame" x="20" y="180" width="388" height="31.333333333333343"/>
+                                        <rect key="frame" x="53.666666666666657" y="180" width="388" height="31.333333333333343"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kf1-7c-jVO">
-                                        <rect key="frame" x="80" y="221.33333333333331" width="268" height="34"/>
+                                        <rect key="frame" x="113.66666666666669" y="221.33333333333331" width="268" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qma-gv-ybk">
-                                        <rect key="frame" x="20" y="410.66666666666669" width="388" height="73"/>
+                                        <rect key="frame" x="53.666666666666657" y="410.66666666666669" width="388" height="73"/>
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="51"/>
                                         <state key="normal" title="Sign in">
                                             <color key="titleColor" systemColor="systemBlueColor"/>
@@ -47,7 +47,7 @@
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d7f-rl-aRC">
-                                        <rect key="frame" x="80" y="316.66666666666669" width="268" height="34"/>
+                                        <rect key="frame" x="113.66666666666669" y="316.66666666666669" width="268" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -59,7 +59,7 @@
                                         </connections>
                                     </switch>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Gt-HV-K2p">
-                                        <rect key="frame" x="20" y="275.33333333333331" width="388" height="31.333333333333314"/>
+                                        <rect key="frame" x="53.666666666666657" y="275.33333333333331" width="388" height="31.333333333333314"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -88,10 +88,19 @@
                                             <constraint firstAttribute="height" constant="10" id="nRR-l3-NZv"/>
                                         </constraints>
                                     </view>
+                                    <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EA3-dV-heh">
+                                        <rect key="frame" x="33" y="0.0" width="428" height="848"/>
+                                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <wkWebViewConfiguration key="configuration">
+                                            <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                            <wkPreferences key="preferences"/>
+                                        </wkWebViewConfiguration>
+                                    </wkWebView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.70482262210000002" green="0.77547201629999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstItem="Kf1-7c-jVO" firstAttribute="top" secondItem="wmk-4U-RTF" secondAttribute="bottom" constant="10" id="0H1-4Q-F9Z"/>
+                                    <constraint firstItem="EA3-dV-heh" firstAttribute="top" secondItem="Ow4-ir-Dbx" secondAttribute="top" id="0rX-vH-5Zc"/>
                                     <constraint firstItem="7vX-pM-Zk5" firstAttribute="top" secondItem="d7f-rl-aRC" secondAttribute="bottom" constant="7.3333333333333144" id="1J9-48-V9h"/>
                                     <constraint firstItem="MTe-CX-Cml" firstAttribute="leading" secondItem="7vX-pM-Zk5" secondAttribute="trailing" constant="5" id="3pa-wn-CLk"/>
                                     <constraint firstItem="wmk-4U-RTF" firstAttribute="top" secondItem="W9K-eB-gRu" secondAttribute="bottom" constant="100" id="6AB-gi-Jyn"/>
@@ -108,14 +117,19 @@
                                     <constraint firstItem="Qma-gv-ybk" firstAttribute="top" secondItem="MTe-CX-Cml" secondAttribute="bottom" constant="43.000000000000057" id="PwH-02-6PW"/>
                                     <constraint firstItem="8Gt-HV-K2p" firstAttribute="top" secondItem="Kf1-7c-jVO" secondAttribute="bottom" constant="20" id="Ty2-x5-KqW"/>
                                     <constraint firstItem="8Gt-HV-K2p" firstAttribute="leading" secondItem="Ow4-ir-Dbx" secondAttribute="leading" constant="20" id="XdA-We-bKg"/>
+                                    <constraint firstItem="Ow4-ir-Dbx" firstAttribute="trailing" secondItem="EA3-dV-heh" secondAttribute="trailing" id="ZaO-SV-5m8"/>
                                     <constraint firstItem="Ow4-ir-Dbx" firstAttribute="trailing" secondItem="wmk-4U-RTF" secondAttribute="trailing" constant="20" id="dZr-do-0yb"/>
                                     <constraint firstAttribute="trailing" secondItem="W9K-eB-gRu" secondAttribute="trailing" constant="179" id="fWY-3T-7BT"/>
+                                    <constraint firstItem="EA3-dV-heh" firstAttribute="leading" secondItem="pjY-az-EHw" secondAttribute="leading" id="gwp-oF-n9u"/>
+                                    <constraint firstAttribute="bottom" secondItem="EA3-dV-heh" secondAttribute="bottom" id="hpi-7d-jmh"/>
+                                    <constraint firstItem="Ow4-ir-Dbx" firstAttribute="trailing" secondItem="EA3-dV-heh" secondAttribute="trailing" id="iQQ-rW-0g1"/>
                                     <constraint firstItem="Ow4-ir-Dbx" firstAttribute="trailing" secondItem="d7f-rl-aRC" secondAttribute="trailing" constant="80" id="js0-ag-5dK"/>
                                     <constraint firstItem="d7f-rl-aRC" firstAttribute="top" secondItem="8Gt-HV-K2p" secondAttribute="bottom" constant="10" id="lDS-ks-y2G"/>
                                     <constraint firstItem="Qma-gv-ybk" firstAttribute="top" secondItem="7vX-pM-Zk5" secondAttribute="bottom" constant="42.666666666666686" id="lRQ-XD-t1E"/>
                                     <constraint firstItem="Ow4-ir-Dbx" firstAttribute="trailing" secondItem="Kf1-7c-jVO" secondAttribute="trailing" constant="80" id="lZi-ed-9kx"/>
                                     <constraint firstItem="B2H-hE-W4P" firstAttribute="top" secondItem="d7f-rl-aRC" secondAttribute="bottom" constant="6.9999999999999432" id="lsV-Po-QZ3"/>
                                     <constraint firstItem="MTe-CX-Cml" firstAttribute="top" secondItem="d7f-rl-aRC" secondAttribute="bottom" constant="7" id="qfM-fI-qlc"/>
+                                    <constraint firstItem="EA3-dV-heh" firstAttribute="leading" secondItem="Ow4-ir-Dbx" secondAttribute="leading" id="rHY-BX-DF3"/>
                                     <constraint firstItem="Ow4-ir-Dbx" firstAttribute="trailing" secondItem="8Gt-HV-K2p" secondAttribute="trailing" constant="20" id="u93-SA-uFA"/>
                                     <constraint firstItem="Kf1-7c-jVO" firstAttribute="leading" secondItem="Ow4-ir-Dbx" secondAttribute="leading" constant="80" id="ulU-EA-VP1"/>
                                     <constraint firstItem="W9K-eB-gRu" firstAttribute="centerX" secondItem="1nS-80-C4D" secondAttribute="centerX" id="y2v-Qa-78f"/>
@@ -144,6 +158,7 @@
                         <outlet property="passwordTextField" destination="d7f-rl-aRC" id="7du-Zi-RiY"/>
                         <outlet property="secondPoint" destination="MTe-CX-Cml" id="YYi-Rb-UmO"/>
                         <outlet property="thirdPoint" destination="B2H-hE-W4P" id="nwg-Cv-Yst"/>
+                        <outlet property="webView" destination="EA3-dV-heh" id="vQk-1I-469"/>
                         <segue destination="Pax-TM-9BJ" kind="presentation" identifier="fromFirstPageToSecondSegue" modalPresentationStyle="fullScreen" id="Fbu-QF-o5g"/>
                     </connections>
                 </viewController>

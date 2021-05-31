@@ -24,3 +24,4 @@ func setNewUser(userNumber: Int, userName: String, userAge: UInt) -> User {
     
     return user
 }
+

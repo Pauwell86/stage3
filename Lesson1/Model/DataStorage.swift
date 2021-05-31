@@ -15,10 +15,11 @@ class DataStorage: NSObject {
 
     // var userArray = [User]()
     var myFriendsArray = [User]()
-    
     var allGroups = [Group]()
     var myFavoriteGroups = [Group]()
-    
     var newsGroups = [News]()
+    var tokenVk = String()
+    var userId = Int()
+
     
 }
