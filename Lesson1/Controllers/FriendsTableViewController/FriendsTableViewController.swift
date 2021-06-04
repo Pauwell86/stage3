@@ -19,6 +19,11 @@ class FriendsTableViewController: UITableViewController, UINavigationControllerD
     
     var myFriendsDict = [String: [User]]()
     var myFriendsSectionTitles = [String]()
+    
+    var friensInfo = [Item]()
+    var friendsService = VKService()
+    var usersArray = [User]()
+
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,13 +31,25 @@ class FriendsTableViewController: UITableViewController, UINavigationControllerD
         self.navigationController?.delegate = self
         self.tableView.register(UINib(nibName: "MyTableViewCell", bundle: nil), forCellReuseIdentifier: friendTableViewCellReuse)
         
-        createMyFriendsDict()
-        
+        friendsService.loadFriends() { [self] users in
+            
+            friensInfo = users
+            
+            for item in self.friensInfo {
+                if !item.lastName.isEmpty {
+                var name = User(name: item.lastName)
+                name.age = UInt(item.id)
+                self.usersArray.append(name)
+                } 
+        }
+            DataStorage.shared.myFriendsArray = self.usersArray
+            
+            createMyFriendsDict()
+            
+            tableView.reloadData()
     }
-    
- 
-
-    // MARK: - Table view data source
+        
+}
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -109,7 +126,6 @@ class FriendsTableViewController: UITableViewController, UINavigationControllerD
         for friend in DataStorage.shared.myFriendsArray {
             let firstLetterIndex = friend.name.index(friend.name.startIndex, offsetBy: 1)
             let friendKey = String(friend.name[..<firstLetterIndex])
-          //  let tempKey = String(friend.name.startIndex)
             
             if  var myFriendValue = myFriendsDict[friendKey] {
                 myFriendValue.append(friend)

@@ -8,32 +8,35 @@
 import Foundation
 import Alamofire
 
-class WeatherService {
-    // базовый URL сервиса
-    let baseUrl = "http://api.openweathermap.org"
-    // ключ для доступа к сервису
-    let apiKey = "92cabe9523da26194b02974bfcd50b7e"
-    
-    // метод для загрузки данных, в качестве аргументов получает город
-    func loadWeatherData(city: String){
+
+final class VKService {
+  private var baseURL = "https://api.vk.com/method/"
+  private var version = "5.131"
         
-    // путь для получения погоды за 5 дней
-        let path = "/data/2.5/forecast"
-    // параметры, город, единицы измерения градусы, ключ для доступа к сервису
-        let parameters: Parameters = [
-            "q": city,
-            "units": "metric",
-            "appid": apiKey
-        ]
-        
-    // составляем URL из базового адреса сервиса и конкретного пути к ресурсу
-        let url = baseUrl+path
-        
-    // делаем запрос
-        AF.request(url, method: .get, parameters: parameters).responseJSON { repsonse in
-            print(repsonse.value as Any)
+    func loadFriends(completion: @escaping ([Item]) -> Void) {
+
+    let path = "friends.get"
+
+    let parameters: Parameters = [
+                    "access_token": DataStorage.shared.tokenVk,
+                    "v": version,
+                    "fields": "photo_200_orig"
+                ]
+
+    let url = baseURL + path
+
+    AF.request(url, method: .get, parameters: parameters).responseData { response in
+
+        guard let data = response.value else { return }
+                    
+        guard let users = try? JSONDecoder().decode(UserJSONElement.self, from: data).response.items else { return }
+                
+        DispatchQueue.main.async {
+            completion(users)
         }
-        
     }
+  }
 }
+
+
 

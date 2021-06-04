@@ -27,7 +27,6 @@ class LoginFormController: UIViewController {
     @IBOutlet weak var thirdPoint: UIView!
     
     let fromFirstPageToSecondSegue = "fromFirstPageToSecondSegue"
-//    let weatherService = WeatherService()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,9 +38,7 @@ class LoginFormController: UIViewController {
         secondPoint.alpha = 0
         thirdPoint.alpha = 0
         
-//        weatherService.loadWeatherData(city: "Moscow")
-
-//       firstRequest()
+//      firstRequest()
 //        let gradientLayer = CAGradientLayer()
 //        gradientLayer.colors = [UIColor.white.cgColor, UIColor.blue.cgColor]
 //        gradientLayer.locations = [0, 1]
@@ -57,6 +54,13 @@ class LoginFormController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        if let token = UserDefaults.standard.string(forKey: "access_token") {
+            DataStorage.shared.tokenVk = token
+            
+            self.navigationController?.pushViewController(MyTabBarController(), animated: true)
+        }
+        
+        
         var urlComponents = URLComponents()
                 urlComponents.scheme = "https"
                 urlComponents.host = "oauth.vk.com"
@@ -67,7 +71,7 @@ class LoginFormController: UIViewController {
                     URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
                     URLQueryItem(name: "scope", value: "262150"),
                     URLQueryItem(name: "response_type", value: "token"),
-                    URLQueryItem(name: "v", value: "5.68")
+                    URLQueryItem(name: "v", value: "5.131")
                 ]
                 
                 let request = URLRequest(url: urlComponents.url!)
@@ -75,147 +79,81 @@ class LoginFormController: UIViewController {
         webView.load(request)
     }
     
-    @IBAction func switchFillLogun(_ sender: Any) {
-        loginTextField.text = "admin"
-        passwordTextField.text = "123456"
-    }
-   
-    @IBAction func signOut(_ seg: UIStoryboardSegue){
-        self.loginTextField.text = ""
-        self.passwordTextField.text = ""
-    
-    }
-    
-    @IBAction func pressSignButton(_ sender: UIButton) {
-        if self.loginTextField.text == "admin",
-           self.passwordTextField.text == "123456" {
-            
-            UIView.animate(withDuration: 0.2,
-                           delay: 0,
-                           options: [.autoreverse],
-                           animations: {[weak self] in
-                            self?.firstPoint.alpha = 1
-                           },
-                           completion:{_ in
-                            self.firstPoint.alpha = 0
-                            UIView.animate(withDuration: 0.2,
-                                           delay: 0,
-                                           options: [.autoreverse],
-                                           animations: {[weak self] in
-                                            self?.secondPoint.alpha = 1
-                                           },
-                                           completion:{_ in
-                                            self.secondPoint.alpha = 0
-                                            UIView.animate(withDuration: 0.2,
-                                                           delay: 0,
-                                                           options: [.autoreverse],
-                                                           animations: {[weak self] in
-                                                            self?.thirdPoint.alpha = 1
-                                                           },
-                                                           completion:{_ in
-                                                            self.thirdPoint.alpha = 0
-                                                            UIView.animate(withDuration: 0.2,
-                                                                           delay: 0,
-                                                                           options: [.autoreverse],
-                                                                           animations: {[weak self] in
-                                                                            self?.firstPoint.alpha = 1
-                                                                           },
-                                                                           completion:{_ in
-                                                                            self.firstPoint.alpha = 0
-                                                                            UIView.animate(withDuration: 0.2,
-                                                                                           delay: 0,
-                                                                                           animations: {[weak self] in
-                                                                                            self?.secondPoint.alpha = 0.5
-                                                                                           },
-                                                                                           completion:{_ in
-                                                                                            self.secondPoint.alpha = 0
-                                                                                            self.performSegue(withIdentifier: self.fromFirstPageToSecondSegue, sender: self)
-                                      })
-                                 })
-                          })
-                    })
-           })
-            
-            
-
-            
-        } else {
-            let alert = UIAlertController(title: "Error", message: "Entered wrong login or password", preferredStyle: .alert)
-
-            let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-
-            alert.addAction(action)
-
-            present(alert, animated: true, completion: nil)
-        }
-    }
-    
-//    func firstRequest() {
-//        // Конфигурация по умолчанию
-//                let configuration = URLSessionConfiguration.default
-//        // собственная сессия
-//                let session =  URLSession(configuration: configuration)
-//
-//        // создаем url из строки
-//                let url = URL(string: "http://samples.openweathermap.org/data/2.5/forecast?q=Moscow,DE&appid=b1b15e88fa797225412429c1c50c122a1")
-//
-//        // задача для запуска
-//        let task = session.dataTask(with: url!) { (data, response, error) in
-//        // в замыкании данные, полученные от сервера, мы преобразуем в json
-//                    let json = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments)
-//        // выводим в консоль
-//                    print(json as Any)
-//                }
-//        // запускаем задачу
-//                task.resume()
+//    @IBAction func switchFillLogun(_ sender: Any) {
+//        loginTextField.text = "admin"
+//        passwordTextField.text = "123456"
 //    }
-    
-    // Конфигурация по умолчанию
-//    func firstRequest() {
-//            let configuration = URLSessionConfiguration.default
 //
-//            // собственная сессия
-//            let session =  URLSession(configuration: configuration)
-//
-//            // создаем конструктор для url
-//            var urlConstructor = URLComponents()
-//            // устанавливаем схему
-//            urlConstructor.scheme = "http"
-//            // устанавливаем хост
-//            urlConstructor.host = "jsonplaceholder.typicode.com"
-//            // путь
-//            urlConstructor.path = "/posts"
-//            // параметры для запроса
-//            urlConstructor.queryItems = [
-//                URLQueryItem(name: "title", value: "foo"),
-//                URLQueryItem(name: "body", value: "bar"),
-//                URLQueryItem(name: "userId", value: "1")
-//            ]
-//
-//            // создаем запрос
-//            var request = URLRequest(url: urlConstructor.url!)
-//            // указываем метод
-//            request.httpMethod = "POST"
-//
-//            // задача для запуска
-//            let task = session.dataTask(with: request) { (data, response, error) in
-//            // в замыкании данные, полученные от сервера, мы преобразуем в json
-//                let json = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments)
-//            // выводим в консоль
-//                print(json as Any)
-//            }
-//            // запускаем задачу
-//            task.resume()
-//    }
-
-//    func firstRequest() {
-//        AF.request("http://samples.openweathermap.org/data/2.5/forecast?q=Moscow,DE&appid=b1b15e88fa797225412429c1c50c122a1").responseJSON { response in
-//
-//                    print(response.value as Any)
-//
-//                }
+//    @IBAction func signOut(_ seg: UIStoryboardSegue){
+//        self.loginTextField.text = ""
+//        self.passwordTextField.text = ""
 //
 //    }
+//
+//    @IBAction func pressSignButton(_ sender: UIButton) {
+//        if self.loginTextField.text == "admin",
+//           self.passwordTextField.text == "123456" {
+//
+//            UIView.animate(withDuration: 0.2,
+//                           delay: 0,
+//                           options: [.autoreverse],
+//                           animations: {[weak self] in
+//                            self?.firstPoint.alpha = 1
+//                           },
+//                           completion:{_ in
+//                            self.firstPoint.alpha = 0
+//                            UIView.animate(withDuration: 0.2,
+//                                           delay: 0,
+//                                           options: [.autoreverse],
+//                                           animations: {[weak self] in
+//                                            self?.secondPoint.alpha = 1
+//                                           },
+//                                           completion:{_ in
+//                                            self.secondPoint.alpha = 0
+//                                            UIView.animate(withDuration: 0.2,
+//                                                           delay: 0,
+//                                                           options: [.autoreverse],
+//                                                           animations: {[weak self] in
+//                                                            self?.thirdPoint.alpha = 1
+//                                                           },
+//                                                           completion:{_ in
+//                                                            self.thirdPoint.alpha = 0
+//                                                            UIView.animate(withDuration: 0.2,
+//                                                                           delay: 0,
+//                                                                           options: [.autoreverse],
+//                                                                           animations: {[weak self] in
+//                                                                            self?.firstPoint.alpha = 1
+//                                                                           },
+//                                                                           completion:{_ in
+//                                                                            self.firstPoint.alpha = 0
+//                                                                            UIView.animate(withDuration: 0.2,
+//                                                                                           delay: 0,
+//                                                                                           animations: {[weak self] in
+//                                                                                            self?.secondPoint.alpha = 0.5
+//                                                                                           },
+//                                                                                           completion:{_ in
+//                                                                                            self.secondPoint.alpha = 0
+//                                                                                            self.performSegue(withIdentifier: self.fromFirstPageToSecondSegue, sender: self)
+//                                      })
+//                                 })
+//                          })
+//                    })
+//           })
+//
+//
+//
+//
+//        } else {
+//            let alert = UIAlertController(title: "Error", message: "Entered wrong login or password", preferredStyle: .alert)
+//
+//            let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+//
+//            alert.addAction(action)
+//
+//            present(alert, animated: true, completion: nil)
+//        }
+//    }
+    
 }
 
 extension LoginFormController: WKNavigationDelegate {
@@ -239,16 +177,20 @@ extension LoginFormController: WKNavigationDelegate {
                 return dict
         }
         
-        guard let token = params["access_token"] else { return }
+            //guard let token = params["access_token"] else { return }
         
-        performSegue(withIdentifier: fromFirstPageToSecondSegue, sender: Any?.self)
-        DataStorage.shared.tokenVk = token
+        let token = params["access_token"]
+        
+        if let token = token, !token.isEmpty {
+            UserDefaults.standard.setValue(token, forKey: "access_token")
 
+            performSegue(withIdentifier: fromFirstPageToSecondSegue, sender: Any?.self)
+        }
+        
         print("TOKEN")
         print(token as Any)
         print("TOKEN")
-        
-        
+                
         decisionHandler(.cancel)
     }
 }
