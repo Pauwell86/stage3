@@ -9,15 +9,16 @@ import UIKit
 
 class MyTabBarController: UITabBarController {
     
+    
     func fillUsersArray() {
         // Создаю друзей
-        let user1 = setNewUser(userNumber: 1, userName: "Вова", userAge: 68)
-        let user2 = setNewUser(userNumber: 2, userName: "Джо", userAge: 78)
-        let user3 = setNewUser(userNumber: 3, userName: "Анжела", userAge: 66)
-        let user4 = setNewUser(userNumber: 4, userName: "Ким", userAge: 37)
-        let user5 = setNewUser(userNumber: 5, userName: "Эмик", userAge: 43)
-        
-        let usersArray = [user1, user2, user3, user4, user5]
+//        let user1 = setNewUser(userNumber: 1, userName: "Вова", userAge: 68)
+//        let user2 = setNewUser(userNumber: 2, userName: "Джо", userAge: 78)
+//        let user3 = setNewUser(userNumber: 3, userName: "Анжела", userAge: 66)
+//        let user4 = setNewUser(userNumber: 4, userName: "Ким", userAge: 37)
+//        let user5 = setNewUser(userNumber: 5, userName: "Эмик", userAge: 43)
+//        
+//        let usersArray = [user1, user2, user3, user4, user5]
         
         // Создаю группы
         let group1 = Group(name: "Пиво всему голова!",
@@ -45,30 +46,29 @@ class MyTabBarController: UITabBarController {
         
         let newsArray = [news1, news2, news3]
         
-        DataStorage.shared.myFriendsArray = usersArray
+//        DataStorage.shared.myFriendsArray = usersArray
         DataStorage.shared.allGroups = groupsArray
         DataStorage.shared.newsGroups = newsArray
         
         
     }
     
+    var friensInfo = [Item]()
+    var friendsService = VKService()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         fillUsersArray()
+        
+        friendsService.loadFriends() { [weak self] users in
 
-        // Do any additional setup after loading the view.
+            self?.friensInfo = users
+            print(self!.friensInfo[3])
+
+        }
+
+
     }
-    
+ }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-}

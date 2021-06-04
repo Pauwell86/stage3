@@ -19,7 +19,7 @@ class DataStorage: NSObject {
     var myFavoriteGroups = [Group]()
     var newsGroups = [News]()
     var tokenVk = String()
-    var userId = Int()
+//    var userId = Int()
 
     
 }
