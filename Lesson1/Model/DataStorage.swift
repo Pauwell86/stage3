@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DataStorage: NSObject {
+final class DataStorage: NSObject {
     static let shared = DataStorage()
     private override init() {
         super.init()
@@ -19,7 +19,5 @@ class DataStorage: NSObject {
     var myFavoriteGroups = [Group]()
     var newsGroups = [News]()
     var tokenVk = String()
-//    var userId = Int()
 
-    
 }
