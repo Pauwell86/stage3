@@ -78,10 +78,6 @@ class LoginFormController: UIViewController, WKNavigationDelegate {
             KeychainWrapper.standard.set(token, forKey: "vkToken")
             DataStorage.shared.tokenVk = token
             showMainTabBar()
-            
-            print("TOKEN")
-            print(token as Any)
-            print("TOKEN")
         }
         
         decisionHandler(.cancel)

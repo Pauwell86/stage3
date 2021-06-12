@@ -33,9 +33,10 @@ import RealmSwift
 
         guard let data = response.data else { return }
         
-//        print(data.prettyJSON as Any)
+ //       print(data.prettyJSON as Any)
                     
         guard let friends = try? JSONDecoder().decode(Friends.self, from: data).response.items else { return }
+
         self?.clearFriendsData()
         self?.saveFriendsData(friends)
                 
@@ -45,6 +46,34 @@ import RealmSwift
     }
         
   }
+    
+    func getFriendsFotos(completion: @escaping ([Item]) -> ())  {
+        let method = "/photos.getAll"
+
+        let parameters: Parameters = [
+                        "owner_id": DataStorage.shared.userID,
+                        "access_token": DataStorage.shared.tokenVk,
+                        "v": version,
+                    ]
+
+        let url = baseURL + method
+
+        AF.request(url, method: .get, parameters: parameters).responseData { response in
+
+            guard let data = response.data else { return }
+            
+ //           print(data.prettyJSON as Any)
+            do {
+                let photos = try JSONDecoder().decode(Photos.self, from: data).response.items
+                
+                DispatchQueue.main.async {
+                    completion(photos)
+                }
+            } catch {
+                print(error)
+            }
+        }
+    }
     
     func clearFriendsData() {
         do {
@@ -67,7 +96,6 @@ import RealmSwift
                 print(error)
             }
         }
-    
 }
 
 

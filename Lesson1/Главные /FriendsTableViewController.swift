@@ -21,10 +21,11 @@ class FriendsTableViewController: UITableViewController, UINavigationControllerD
     var myFriendsDict = [String: [User]]()
     var myFriendsSectionTitles = [String]()
     
-      var friend = User(name: "")
-      var friensInfo = [UserJSON]()
-      var friendsService = VKService()
-      var usersArray = [User]()
+    var friend = User(name: "")
+    var friensInfo = [UserJSON]()
+    var friendsService = VKService()
+    var usersArray = [User]()
+    var token: NotificationToken?
 
         
     override func viewDidLoad() {
@@ -33,15 +34,34 @@ class FriendsTableViewController: UITableViewController, UINavigationControllerD
         self.navigationController?.delegate = self
         self.tableView.register(UINib(nibName: "MyTableViewCell", bundle: nil), forCellReuseIdentifier: friendTableViewCellReuse)
         
+        let realm = try! Realm()
+        let friends = realm.objects(UserJSON.self)
+        
+        token = friends.observe { changes in
+            switch changes {
+                       case .initial(let results):
+                           print(results)
+                       case let .update(results, deletions, insertions, modifications):
+                           print(results, deletions, insertions, modifications)
+                       case .error(let error):
+                           print(error)
+                       }
+                       print("данные изменились")
+                   }
+        
         loadDataFromRealm()
-    
         friendsService.getFriends { [weak self] _ in
             DispatchQueue.main.async {
                 self?.loadDataFromRealm()
             }
+            
         }
-        self.tableView.reloadData()
+        
 }
+    
+    deinit {
+        token?.invalidate()
+    }
         
     override func numberOfSections(in tableView: UITableView) -> Int {
         return myFriendsSectionTitles.count
@@ -140,6 +160,7 @@ class FriendsTableViewController: UITableViewController, UINavigationControllerD
                 let image = UIImage(data: data!)
                 friend.avatar = image
             }
+                friend.userID = item.id
         }
 
             usersArray.append(friend)
@@ -180,6 +201,7 @@ class FriendsTableViewController: UITableViewController, UINavigationControllerD
         } catch {
             print(error.localizedDescription)
         }
+        self.tableView.reloadData()
         self.createMyFriendsArray()
         self.createMyFriendsDict()
     }

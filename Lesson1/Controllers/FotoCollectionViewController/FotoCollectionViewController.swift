@@ -6,15 +6,18 @@
 //
 
 import UIKit
+import RealmSwift
 
 private let reuseIdentifier = "Cell"
 
 class FotoCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var user: User?
+    var fotosArray = [UIImage]()
+    var photosFriends = VKService()
     let countCells = 2
     let FotoCollectionViewCellReuse = "FotoCollectionViewCell"
-    var fotosArray = [UIImage]()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,10 +25,30 @@ class FotoCollectionViewController: UICollectionViewController, UICollectionView
         self.collectionView.register(UINib(nibName: "FotoCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: FotoCollectionViewCellReuse)
         
         guard let _ = user,
-              let array = user?.fotoArray
+              let userID = user?.userID
         else { return }
         
-        fotosArray = array
+        DataStorage.shared.userID = userID
+        
+        photosFriends.getFriendsFotos { [weak self] photosJSON in
+            
+            let albumArray = photosJSON
+            albumArray.forEach {
+                $0.sizes.forEach {
+                    if $0.type.rawValue == "z" {
+                        if let url = URL(string: $0.url) {
+                           let data = try? Data(contentsOf: url)
+                           let image = UIImage(data: data!)
+                           self?.fotosArray.append(image!)
+                    }
+                }
+            }
+            
+            DataStorage.shared.friedPhotos = self!.fotosArray
+            
+            self!.collectionView.reloadData()
+            }
+        }
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -33,13 +56,13 @@ class FotoCollectionViewController: UICollectionViewController, UICollectionView
     }
 
       override  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fotosArray.count
+        return DataStorage.shared.friedPhotos.count
     }
 
       override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FotoCollectionViewCellReuse, for: indexPath) as? FotoCollectionViewCell else {return UICollectionViewCell()}
     
-        cell.configure(foto: fotosArray[indexPath.item])
+        cell.configure(foto: DataStorage.shared.friedPhotos[indexPath.item])
     
         return cell
     }
@@ -47,15 +70,10 @@ class FotoCollectionViewController: UICollectionViewController, UICollectionView
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
             let frameCV = collectionView.frame
             let widthCell = frameCV.width / CGFloat(countCells)
-            let heigthCell = widthCell + 50
-            return CGSize(width: widthCell, height: heigthCell)
+            let heigthCell = widthCell + 20
+            return CGSize(width: widthCell , height: heigthCell)
     }
 
-}
 
-//extension FotoCollectionViewController: UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//
-//        return CGSize(width: 100, height: 100)
-//    }
-//}
+
+}
