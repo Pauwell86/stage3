@@ -17,7 +17,8 @@
 		C0376E942627780600EFF117 /* FotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0376E922627780600EFF117 /* FotoCollectionViewCell.swift */; };
 		C0376E952627780600EFF117 /* FotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0376E932627780600EFF117 /* FotoCollectionViewCell.xib */; };
 		C03AA2AE266017F200CF33AC /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03AA2AD266017F200CF33AC /* Service.swift */; };
-		C0461C4C26681A21006B4DA2 /* UsersElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0461C4B26681A21006B4DA2 /* UsersElement.swift */; };
+		C0461C4C26681A21006B4DA2 /* UsersJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0461C4B26681A21006B4DA2 /* UsersJSON.swift */; };
+		C0461C83266B876B006B4DA2 /* VKSwipe.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C0461C81266B876B006B4DA2 /* VKSwipe.xcdatamodeld */; };
 		C06EF3A1262578B10022C2DA /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06EF3A0262578B10022C2DA /* MyTabBarController.swift */; };
 		C06EF3A62625E6A90022C2DA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06EF3A52625E6A90022C2DA /* User.swift */; };
 		C06EF3AB2625E8040022C2DA /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06EF3AA2625E8040022C2DA /* Group.swift */; };
@@ -55,7 +56,8 @@
 		C0376E922627780600EFF117 /* FotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		C0376E932627780600EFF117 /* FotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FotoCollectionViewCell.xib; sourceTree = "<group>"; };
 		C03AA2AD266017F200CF33AC /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
-		C0461C4B26681A21006B4DA2 /* UsersElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersElement.swift; sourceTree = "<group>"; };
+		C0461C4B26681A21006B4DA2 /* UsersJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersJSON.swift; sourceTree = "<group>"; };
+		C0461C82266B876B006B4DA2 /* VKSwipe.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VKSwipe.xcdatamodel; sourceTree = "<group>"; };
 		C06EF3A0262578B10022C2DA /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 		C06EF3A52625E6A90022C2DA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C06EF3AA2625E8040022C2DA /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
@@ -71,7 +73,7 @@
 		C0B0C47B2618833100C08D7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C0B0C47D2618833700C08D7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C0B0C4802618833700C08D7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		C0B0C4822618833700C08D7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C0B0C4822618833700C08D7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Lesson1/Resources/Info.plist; sourceTree = SOURCE_ROOT; };
 		C0B0C48D261CB1D000C08D7A /* LoginFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormController.swift; sourceTree = "<group>"; };
 		C0CF3EEC26406E340089690E /* AnimatePicsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnimatePicsController.swift; path = Lesson1/Controllers/AnimatePicsController.swift; sourceTree = SOURCE_ROOT; };
 		C0D020DF2649B587000E592C /* InteractiveTransitionClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveTransitionClass.swift; sourceTree = "<group>"; };
@@ -113,6 +115,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C0017419266E803E00187622 /* Главные  */ = {
+			isa = PBXGroup;
+			children = (
+				C0B0C48D261CB1D000C08D7A /* LoginFormController.swift */,
+				C0D020E62649CA2B000E592C /* FriendsTableViewController.swift */,
+				C0461C4B26681A21006B4DA2 /* UsersJSON.swift */,
+				C03AA2AD266017F200CF33AC /* Service.swift */,
+			);
+			path = "Главные ";
+			sourceTree = "<group>";
+		};
 		C00F52E62636955F00A75D32 /* NewsController */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,9 +144,17 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		C0222E22266CE84000F64A3A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		C02BA5C326275F1400D14C49 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C06EF3A0262578B10022C2DA /* MyTabBarController.swift */,
 				C050E1D2264950B100EDBD4F /* CustomNavigationController */,
 				C0EAAD612641903100D220F4 /* AnimateController */,
 				C00F52E62636955F00A75D32 /* NewsController */,
@@ -157,7 +178,6 @@
 		C0376E8E2627776D00EFF117 /* FriendsTableViewController */ = {
 			isa = PBXGroup;
 			children = (
-				C0D020E62649CA2B000E592C /* FriendsTableViewController.swift */,
 				C02BA5C52627625000D14C49 /* Cells */,
 			);
 			path = FriendsTableViewController;
@@ -181,6 +201,27 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		C0461C7D266B849F006B4DA2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C0B0C47A2618833100C08D7A /* Main.storyboard */,
+				C0B0C47D2618833700C08D7A /* Assets.xcassets */,
+				C0B0C47F2618833700C08D7A /* LaunchScreen.storyboard */,
+				C0B0C4822618833700C08D7A /* Info.plist */,
+				C0461C81266B876B006B4DA2 /* VKSwipe.xcdatamodeld */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C0461C7E266B8528006B4DA2 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C0B0C4742618833100C08D7A /* AppDelegate.swift */,
+				C0B0C4762618833100C08D7A /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		C050E1D2264950B100EDBD4F /* CustomNavigationController */ = {
 			isa = PBXGroup;
 			children = (
@@ -198,8 +239,8 @@
 				C06EF3A52625E6A90022C2DA /* User.swift */,
 				C06EF3AA2625E8040022C2DA /* Group.swift */,
 				C00F52F22636BB2900A75D32 /* News.swift */,
+				C06EF3B8262743870022C2DA /* SetUp.swift */,
 				C06EF3AD2625EA220022C2DA /* DataStorage.swift */,
-				C0461C4B26681A21006B4DA2 /* UsersElement.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -208,6 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				C08760502666907C008D7BCB /* PrettyJSON.swift */,
+				C00317922633FF940030E226 /* CustomView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -233,20 +275,13 @@
 		C0B0C4732618833100C08D7A /* Lesson1 */ = {
 			isa = PBXGroup;
 			children = (
+				C0017419266E803E00187622 /* Главные  */,
+				C0461C7E266B8528006B4DA2 /* App */,
+				C0461C7D266B849F006B4DA2 /* Resources */,
 				C06EF3A42625E68E0022C2DA /* Model */,
-				C0B0C4742618833100C08D7A /* AppDelegate.swift */,
-				C0B0C4762618833100C08D7A /* SceneDelegate.swift */,
-				C0B0C48D261CB1D000C08D7A /* LoginFormController.swift */,
-				C0B0C47A2618833100C08D7A /* Main.storyboard */,
-				C06EF3A0262578B10022C2DA /* MyTabBarController.swift */,
-				C06EF3B8262743870022C2DA /* SetUp.swift */,
-				C00317922633FF940030E226 /* CustomView.swift */,
 				C02BA5C326275F1400D14C49 /* Controllers */,
-				C0B0C47D2618833700C08D7A /* Assets.xcassets */,
-				C0B0C47F2618833700C08D7A /* LaunchScreen.storyboard */,
-				C0B0C4822618833700C08D7A /* Info.plist */,
-				C03AA2AD266017F200CF33AC /* Service.swift */,
 				C08760542667F4FA008D7BCB /* Extensions */,
+				C0222E22266CE84000F64A3A /* Services */,
 			);
 			path = Lesson1;
 			sourceTree = "<group>";
@@ -398,6 +433,7 @@
 				C03AA2AE266017F200CF33AC /* Service.swift in Sources */,
 				C0D020E72649CA2B000E592C /* FriendsTableViewController.swift in Sources */,
 				C0E520BF2644601A004FC661 /* PushAnimation.swift in Sources */,
+				C0461C83266B876B006B4DA2 /* VKSwipe.xcdatamodeld in Sources */,
 				C0F004C92628A932005BF2A8 /* AllGroupController.swift in Sources */,
 				C0CF3EED26406E340089690E /* AnimatePicsController.swift in Sources */,
 				C0F004C52628A17C005BF2A8 /* MyGroupController.swift in Sources */,
@@ -411,7 +447,7 @@
 				C0376E942627780600EFF117 /* FotoCollectionViewCell.swift in Sources */,
 				C0B0C4752618833100C08D7A /* AppDelegate.swift in Sources */,
 				C0376E8C262774D800EFF117 /* FotoCollectionViewController.swift in Sources */,
-				C0461C4C26681A21006B4DA2 /* UsersElement.swift in Sources */,
+				C0461C4C26681A21006B4DA2 /* UsersJSON.swift in Sources */,
 				C00F52F32636BB2900A75D32 /* News.swift in Sources */,
 				C00F52E9263695B400A75D32 /* NewsTableViewController.swift in Sources */,
 				C0EAAD702641A84E00D220F4 /* PicsImageView.swift in Sources */,
@@ -568,7 +604,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Lesson1/Info.plist;
+				INFOPLIST_FILE = Lesson1/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -587,7 +623,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Lesson1/Info.plist;
+				INFOPLIST_FILE = Lesson1/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -621,6 +657,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C0461C81266B876B006B4DA2 /* VKSwipe.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C0461C82266B876B006B4DA2 /* VKSwipe.xcdatamodel */,
+			);
+			currentVersion = C0461C82266B876B006B4DA2 /* VKSwipe.xcdatamodel */;
+			path = VKSwipe.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = C0B0C4692618833100C08D7A /* Project object */;
 }

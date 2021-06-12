@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class FriendsTableViewController: UITableViewController, UINavigationControllerDelegate {
     
@@ -20,9 +21,11 @@ class FriendsTableViewController: UITableViewController, UINavigationControllerD
     var myFriendsDict = [String: [User]]()
     var myFriendsSectionTitles = [String]()
     
-    var friensInfo = [Item]()
+    var friend = User(name: "")
+    var friensInfo = [UserJSON]()
     var friendsService = VKService()
     var usersArray = [User]()
+    var token: NotificationToken?
 
         
     override func viewDidLoad() {
@@ -31,28 +34,36 @@ class FriendsTableViewController: UITableViewController, UINavigationControllerD
         self.navigationController?.delegate = self
         self.tableView.register(UINib(nibName: "MyTableViewCell", bundle: nil), forCellReuseIdentifier: friendTableViewCellReuse)
         
-        friendsService.loadFriends() { [self] users in
+        let realm = try! Realm()
+        let friends = realm.objects(UserJSON.self)
+        
+        token = friends.observe { changes in
+            switch changes {
+                       case .initial(let results):
+                           print(results)
+                       case let .update(results, deletions, insertions, modifications):
+                           print(results, deletions, insertions, modifications)
+                       case .error(let error):
+                           print(error)
+                       }
+                       print("данные изменились")
+                   }
+        
+        loadDataFromRealm()
+        friendsService.getFriends { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.loadDataFromRealm()
+            }
             
-            friensInfo = users
-            
-            for item in self.friensInfo {
-                if !item.lastName.isEmpty {
-                var name = User(name: item.lastName)
-                name.age = UInt(item.id)
-                self.usersArray.append(name)
-                } 
         }
-            DataStorage.shared.myFriendsArray = self.usersArray
-            
-            createMyFriendsDict()
-            
-            tableView.reloadData()
-    }
         
 }
-
+    
+    deinit {
+        token?.invalidate()
+    }
+        
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return myFriendsSectionTitles.count
     }
     
@@ -118,29 +129,6 @@ class FriendsTableViewController: UITableViewController, UINavigationControllerD
         return 100
     }
     
-//    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        return 100
-//    }
-    
-    func createMyFriendsDict() {
-        for friend in DataStorage.shared.myFriendsArray {
-            let firstLetterIndex = friend.name.index(friend.name.startIndex, offsetBy: 1)
-            let friendKey = String(friend.name[..<firstLetterIndex])
-            
-            if  var myFriendValue = myFriendsDict[friendKey] {
-                myFriendValue.append(friend)
-                myFriendsDict[friendKey] = myFriendValue
-            } else {
-                myFriendsDict[friendKey] = [friend]
-                
-            }
-        }
-        
-        myFriendsSectionTitles = [String](myFriendsDict.keys)
-        myFriendsSectionTitles = myFriendsSectionTitles.sorted(by: { $0 < $1 })
-        
-    }
-    
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
 
         if operation == .push {
@@ -161,4 +149,62 @@ class FriendsTableViewController: UITableViewController, UINavigationControllerD
         return interactiveTransition.isStarted ? interactiveTransition : nil
 
     }
+    
+    func createMyFriendsArray() {
+        for item in friensInfo {
+            if item.firstName != "DELETED" {
+            friend.name = "\(item.lastName) \(item.firstName)"
+
+            if let url = URL(string: item.photo200_Orig) {
+                let data = try? Data(contentsOf: url)
+                let image = UIImage(data: data!)
+                friend.avatar = image
+            }
+                friend.userID = item.id
+        }
+
+            usersArray.append(friend)
+            DataStorage.shared.myFriendsArray = usersArray
+        }
+        
+    }
+    
+    func createMyFriendsDict() {
+        
+//      print(DataStorage.shared.myFriendsArray)
+
+        for friend in DataStorage.shared.myFriendsArray {
+            let firstLetterIndex = friend.name.index(friend.name.startIndex, offsetBy: 1)
+            let friendKey = String(friend.name[..<firstLetterIndex])
+            
+            if  var myFriendValue = myFriendsDict[friendKey] {
+                myFriendValue.append(friend)
+                myFriendsDict[friendKey] = myFriendValue
+            } else {
+                myFriendsDict[friendKey] = [friend]
+                
+            }
+        }
+        
+        myFriendsSectionTitles = [String](myFriendsDict.keys)
+        myFriendsSectionTitles = myFriendsSectionTitles.sorted(by: { $0 < $1 })
+                
+//        print(myFriendsDict)
+    }
+    
+    func loadDataFromRealm() {
+        do {
+            let realm = try Realm()
+            print(realm.configuration.fileURL as Any)
+            let friends = realm.objects(UserJSON.self)
+            self.friensInfo = Array(friends)
+        } catch {
+            print(error.localizedDescription)
+        }
+        self.tableView.reloadData()
+        self.createMyFriendsArray()
+        self.createMyFriendsDict()
+    }
+    
+    
 }

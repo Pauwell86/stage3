@@ -10,6 +10,7 @@ import UIKit
 
 struct User {
     var name: String
+    var userID: Int?
     var age: UInt?
     var avatar: UIImage?
     var fotoArray = [UIImage]()
