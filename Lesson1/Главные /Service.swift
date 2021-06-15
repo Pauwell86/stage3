@@ -15,7 +15,7 @@ import RealmSwift
   private var baseURL = "https://api.vk.com/method"
   private var version = "5.131"
     
-        
+        //completion: @escaping ([UserJSON]) -> ()
     func getFriends(completion: @escaping ([UserJSON]) -> ()) {
 
     let method = "/friends.get"
@@ -32,16 +32,15 @@ import RealmSwift
     AF.request(url, method: .get, parameters: parameters).responseData { [weak self] response in
 
         guard let data = response.data else { return }
-        
- //       print(data.prettyJSON as Any)
+    
+//        print(data.prettyJSON as Any)
                     
         guard let friends = try? JSONDecoder().decode(Friends.self, from: data).response.items else { return }
+//        print("\(friends) zzz")
 
-        self?.clearFriendsData()
-        self?.saveFriendsData(friends)
-                
         DispatchQueue.main.async {
-            completion(friends)
+            self?.clearFriendsData()
+            self?.saveFriendsData(friends)
         }
     }
         
@@ -62,9 +61,10 @@ import RealmSwift
 
             guard let data = response.data else { return }
             
- //           print(data.prettyJSON as Any)
+//            print(data.prettyJSON as Any)
             do {
                 let photos = try JSONDecoder().decode(Photos.self, from: data).response.items
+    //        print("\(photos)  hey")
                 
                 DispatchQueue.main.async {
                     completion(photos)
@@ -89,6 +89,7 @@ import RealmSwift
     func saveFriendsData(_ friends: [UserJSON]) {
             do {
                 let realm = try Realm()
+                print(realm.configuration.fileURL as Any)
                 realm.beginWrite()
                 realm.add(friends)
                 try realm.commitWrite()

@@ -73,7 +73,7 @@ class LoginFormController: UIViewController, WKNavigationDelegate {
         }
                 
         if let token = params["access_token"] {
-//            print(token as Any)
+            print(token as Any)
 
             KeychainWrapper.standard.set(token, forKey: "vkToken")
             DataStorage.shared.tokenVk = token
