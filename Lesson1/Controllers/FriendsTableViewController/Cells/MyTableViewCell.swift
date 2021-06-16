@@ -16,7 +16,7 @@ class MyTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var ageLabel: UILabel!
     
-    var saveUser: User?
+    var saveUser: UserJSON?
     var saveGroup: Group?
     
     func clearCell() {
@@ -57,19 +57,23 @@ class MyTableViewCell: UITableViewCell {
     }
     
     
-    func configureWithUser(user: User) {
+    func configureWithUser(user: UserJSON) {
         
-        nameLabel.text = user.name
+        nameLabel.text = "\(user.lastName) \(user.firstName)"
         
-        if let age = user.age {
-            ageLabel.text = String(age) + " лет"
-        }
-        
-        if let image = user.avatar {
+//        if let age = user. {
+//            ageLabel.text = String(age) + " лет"
+//        }
+
+
+        if let url = URL(string: user.photo200_Orig) {
+            let data = try? Data(contentsOf: url)
+            let image = UIImage(data: data!)
             myImage.image = image
             myImage.layer.cornerRadius = 50
-
         }
+        
+
         
         myView.layer.cornerRadius = 50
         myView.layer.shadowColor = UIColor.white.cgColor
