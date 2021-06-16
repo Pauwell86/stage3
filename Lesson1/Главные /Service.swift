@@ -16,7 +16,7 @@ import RealmSwift
   private var version = "5.131"
     
         //completion: @escaping ([UserJSON]) -> ()
-    func getFriends(completion: @escaping ([UserJSON]) -> ()) {
+    func getFriends() {
 
     let method = "/friends.get"
 
