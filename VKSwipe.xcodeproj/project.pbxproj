@@ -34,6 +34,8 @@
 		C0B0C47E2618833700C08D7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0B0C47D2618833700C08D7A /* Assets.xcassets */; };
 		C0B0C4812618833700C08D7A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0B0C47F2618833700C08D7A /* LaunchScreen.storyboard */; };
 		C0B0C48E261CB1D000C08D7A /* LoginFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B0C48D261CB1D000C08D7A /* LoginFormController.swift */; };
+		C0B89597267A839A000BC25A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C0B89596267A839A000BC25A /* GoogleService-Info.plist */; };
+		C0B89615267BD2AA000BC25A /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B89614267BD2AA000BC25A /* Firebase.swift */; };
 		C0CF3EED26406E340089690E /* AnimatePicsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF3EEC26406E340089690E /* AnimatePicsController.swift */; };
 		C0D020E02649B587000E592C /* InteractiveTransitionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D020DF2649B587000E592C /* InteractiveTransitionClass.swift */; };
 		C0D020E72649CA2B000E592C /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D020E62649CA2B000E592C /* FriendsTableViewController.swift */; };
@@ -75,6 +77,8 @@
 		C0B0C4802618833700C08D7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C0B0C4822618833700C08D7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Lesson1/Resources/Info.plist; sourceTree = SOURCE_ROOT; };
 		C0B0C48D261CB1D000C08D7A /* LoginFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormController.swift; sourceTree = "<group>"; };
+		C0B89596267A839A000BC25A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C0B89614267BD2AA000BC25A /* Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
 		C0CF3EEC26406E340089690E /* AnimatePicsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnimatePicsController.swift; path = Lesson1/Controllers/AnimatePicsController.swift; sourceTree = SOURCE_ROOT; };
 		C0D020DF2649B587000E592C /* InteractiveTransitionClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveTransitionClass.swift; sourceTree = "<group>"; };
 		C0D020E62649CA2B000E592C /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +126,7 @@
 				C0D020E62649CA2B000E592C /* FriendsTableViewController.swift */,
 				C0461C4B26681A21006B4DA2 /* UsersJSON.swift */,
 				C03AA2AD266017F200CF33AC /* Service.swift */,
+				C0B89614267BD2AA000BC25A /* Firebase.swift */,
 			);
 			path = "Главные ";
 			sourceTree = "<group>";
@@ -209,6 +214,7 @@
 				C0B0C47F2618833700C08D7A /* LaunchScreen.storyboard */,
 				C0B0C4822618833700C08D7A /* Info.plist */,
 				C0461C81266B876B006B4DA2 /* VKSwipe.xcdatamodeld */,
+				C0B89596267A839A000BC25A /* GoogleService-Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -376,6 +382,7 @@
 				C0376E952627780600EFF117 /* FotoCollectionViewCell.xib in Resources */,
 				C00F52F0263695D100A75D32 /* NewsTableViewCell.xib in Resources */,
 				C0B0C47C2618833100C08D7A /* Main.storyboard in Resources */,
+				C0B89597267A839A000BC25A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,6 +446,7 @@
 				C0F004C52628A17C005BF2A8 /* MyGroupController.swift in Sources */,
 				C06EF3A1262578B10022C2DA /* MyTabBarController.swift in Sources */,
 				C07AD249264928EA0081AC73 /* CustomNavigationController.swift in Sources */,
+				C0B89615267BD2AA000BC25A /* Firebase.swift in Sources */,
 				C0B0C48E261CB1D000C08D7A /* LoginFormController.swift in Sources */,
 				C06EF3AE2625EA220022C2DA /* DataStorage.swift in Sources */,
 				C06EF3A62625E6A90022C2DA /* User.swift in Sources */,

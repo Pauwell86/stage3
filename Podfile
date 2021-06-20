@@ -10,4 +10,11 @@ target 'VK' do
  pod 'RealmSwift'
  pod 'SwiftKeychainWrapper'
  pod 'SDWebImage'
+ pod 'Firebase/Auth'
+ pod 'Firebase/Analytics'
+ pod 'Firebase/Crashlytics'
+ pod 'Firebase/Firestore'
+ pod 'Firebase/Database'
+ pod 'SDWebImage'
+
 end

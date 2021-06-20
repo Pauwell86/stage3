@@ -7,11 +7,11 @@
 
 import UIKit
 import RealmSwift
+import SDWebImage
+
 
 class FriendsTableViewController: UITableViewController, UINavigationControllerDelegate {
 
-    
-    
     let fromFriendsToFriendSegue = "fromFriendsToFriendSegue"
     let friendTableViewCellReuse = "MyTableViewCell"
    
@@ -23,14 +23,13 @@ class FriendsTableViewController: UITableViewController, UINavigationControllerD
     
     var myFriendsDict = [String: [User]]()
     var myFriendsSectionTitles = [String]()
-    
-    var friend = User(name: "")
     var friensInfo = [UserJSON]()
     var friendsService = VKService()
     var usersArray = [User]()
     var token: NotificationToken?
     var friends: Results<UserJSON>?
-    
+//    var friends = [FirebaseFriend]()
+//    private let ref = Database.database().reference(withPath: "friends")
 
         
     override func viewDidLoad() {
@@ -40,19 +39,16 @@ class FriendsTableViewController: UITableViewController, UINavigationControllerD
         self.tableView.register(UINib(nibName: "MyTableViewCell", bundle: nil), forCellReuseIdentifier: friendTableViewCellReuse)
         mySearchBar.delegate = self
 
-        friendsService.getFriends()
-
         let realm = try! Realm()
         friends = realm.objects(UserJSON.self)
-        print("\(String(describing: friends)) xxx")
-        
         token = friends!.observe { [weak self] changes in
 
             switch changes {
                        case .initial:
                         self?.tableView.reloadData()
 
-                       case .update(_, let deletions, let insertions, let modifications):                        
+                       case .update(_, let deletions, let insertions, let modifications):
+
                         self?.tableView.beginUpdates()
                          self?.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
                                              with: .automatic)
@@ -61,12 +57,15 @@ class FriendsTableViewController: UITableViewController, UINavigationControllerD
                          self?.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
                                              with: .automatic)
                         self?.tableView.endUpdates()
-                        
+
                        case .error(let error):
                         print(error)
                    }
             print("данные изменились")
         }
+        
+        friendsService.getFriends()
+
 }
     
     deinit {
@@ -98,7 +97,7 @@ override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: Inde
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == fromFriendsToFriendSegue {
-            guard let user = sender as? User,
+            guard let user = sender as? UserJSON,
                   let destenation = segue.destination as? FotoCollectionViewController
             else { return }
             destenation.user = user
@@ -109,9 +108,8 @@ override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: Inde
 override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: friendTableViewCellReuse, for: indexPath) as? MyTableViewCell else {return UITableViewCell()}
     
-    
-    let friend = friends![indexPath.row]
-    cell.configureWithUser(user: friend)
+        let friend = friends![indexPath.row]
+        cell.configureWithUser(user: friend)
     
     return cell
 }

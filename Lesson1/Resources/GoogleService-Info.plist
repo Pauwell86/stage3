@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>770033778900-u96lfb4av4b2b8ej2b8p0th417mo4h99.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.770033778900-u96lfb4av4b2b8ej2b8p0th417mo4h99</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDe0hn8_xX1SQrNzv36uJtnSzB3dOLFz1w</string>
+	<key>GCM_SENDER_ID</key>
+	<string>770033778900</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>Iushko-Pavel.Lesson1</string>
+	<key>PROJECT_ID</key>
+	<string>myvk-b2107</string>
+	<key>STORAGE_BUCKET</key>
+	<string>myvk-b2107.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:770033778900:ios:6e6da2867f38d673cabb41</string>
+</dict>
+</plist>

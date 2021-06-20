@@ -7,6 +7,7 @@
 
 import Foundation
 import RealmSwift
+import FirebaseFirestore
 
 // MARK: - GET FRIENDS
 
@@ -107,5 +108,36 @@ enum TypeEnum: String, Codable {
     case x = "x"
     case y = "y"
     case z = "z"
+}
+
+// MARK: - GET GROUPS
+
+class Groups: Decodable {
+    let response: GroupsResponse
+}
+
+class GroupsResponse: Decodable {
+    let count: Int
+    let items: [GroupsJSON]
+}
+    
+class GroupsJSON: Object, Decodable {
+  @objc dynamic var desc = ""
+  @objc dynamic var id = 0
+  @objc dynamic var photoURL = ""
+  @objc dynamic var name = ""
+
+    func toFirestore() -> [String: Any] {
+        return [
+            String(format: "%0.f", id) : name
+        ]
+    }
+
+    
+  enum CodingKeys: String, CodingKey {
+      case id
+      case photoURL = "photo_200"
+      case name
+  }
 }
 
