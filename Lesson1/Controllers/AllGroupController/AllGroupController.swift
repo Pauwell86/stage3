@@ -6,51 +6,89 @@
 //
 
 import UIKit
+import RealmSwift
 
 class AllGroupController: UITableViewController {
     
     let friendTableViewCellReuse = "MyTableViewCell"
+    let groupsService = VKService()
+    var token: NotificationToken?
+    var groups: Results<GroupsJSON>?
+    var selectedGroup: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.register(UINib(nibName: "MyTableViewCell", bundle: nil), forCellReuseIdentifier: friendTableViewCellReuse)
+        
+        let realm = try! Realm()
+        groups = realm.objects(GroupsJSON.self)
+        token = groups!.observe { [weak self] changes in
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+            switch changes {
+                       case .initial:
+                        self?.tableView.reloadData()
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+                       case .update(_, let deletions, let insertions, let modifications):
+                        
+                        self?.tableView.beginUpdates()
+                         self?.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+                                             with: .automatic)
+                         self?.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
+                                             with: .automatic)
+                         self?.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+                                             with: .automatic)
+                        self?.tableView.endUpdates()
+                        
+                       case .error(let error):
+                        print(error)
+                   }
+            print("данные изменились")
+        }
+        
+        groupsService.getGroups()
+
+}
+    
+    deinit {
+        token?.invalidate()
     }
+        
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return DataStorage.shared.allGroups.count
+        return groups!.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: friendTableViewCellReuse, for: indexPath) as? MyTableViewCell else {return UITableViewCell()}
 
-        cell.configureWithGroup(group: DataStorage.shared.allGroups[indexPath.row])
-
+        let group = groups![indexPath.row]
+    
+        cell.configureWithGroup(group: group)
+        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 160
+        return 100
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? MyTableViewCell,
               let group = cell.saveGroup
         else {return}
+       
+        if !group.name.isEmpty {
+        selectedGroup = group.name
+        }
+        
+        groupsService.saveToFirestore(DataStorage.shared.myFavoriteGroups, group: selectedGroup!)
         
         var isEnableItem = false
         
@@ -63,63 +101,9 @@ class AllGroupController: UITableViewController {
         if !isEnableItem {
             DataStorage.shared.myFavoriteGroups.append(group)
         }
-        
+                
         self.navigationController?.popViewController(animated: true)
         
     }
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

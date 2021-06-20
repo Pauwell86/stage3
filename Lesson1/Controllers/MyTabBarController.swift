@@ -47,7 +47,7 @@ class MyTabBarController: UITabBarController {
         let newsArray = [news1, news2, news3]
         
 //        DataStorage.shared.myFriendsArray = usersArray
-        DataStorage.shared.allGroups = groupsArray
+//        DataStorage.shared.allGroups = groupsArray
         DataStorage.shared.newsGroups = newsArray
         
         

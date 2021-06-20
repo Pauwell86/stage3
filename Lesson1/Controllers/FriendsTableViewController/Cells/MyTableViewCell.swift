@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class MyTableViewCell: UITableViewCell {
 
@@ -17,7 +18,8 @@ class MyTableViewCell: UITableViewCell {
     @IBOutlet weak var ageLabel: UILabel!
     
     var saveUser: UserJSON?
-    var saveGroup: Group?
+//    var saveUser: FirebaseFriend?
+    var saveGroup: GroupsJSON?
     
     func clearCell() {
         myImage.image = nil
@@ -48,7 +50,7 @@ class MyTableViewCell: UITableViewCell {
         
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [UIColor.blue.cgColor, UIColor.white.cgColor]
-        gradientLayer.locations = [0, 0.6]
+        gradientLayer.locations = [0, 1]
         gradientLayer.startPoint = CGPoint.zero
         gradientLayer.endPoint = CGPoint(x: 1, y: 0)
         gradientLayer.frame = contentView.frame
@@ -61,20 +63,10 @@ class MyTableViewCell: UITableViewCell {
         
         nameLabel.text = "\(user.lastName) \(user.firstName)"
         
-//        if let age = user. {
-//            ageLabel.text = String(age) + " лет"
-//        }
-
-
-        if let url = URL(string: user.photo200_Orig) {
-            let data = try? Data(contentsOf: url)
-            let image = UIImage(data: data!)
-            myImage.image = image
-            myImage.layer.cornerRadius = 50
-        }
+       
+        myImage.sd_setImage(with: URL(string: user.photo200_Orig), placeholderImage: UIImage())
         
-
-        
+        myImage.layer.cornerRadius = 50
         myView.layer.cornerRadius = 50
         myView.layer.shadowColor = UIColor.white.cgColor
         myView.layer.shadowRadius = 20
@@ -84,20 +76,14 @@ class MyTableViewCell: UITableViewCell {
     
     }
     
-    func configureWithGroup(group: Group) {
+    func configureWithGroup(group: GroupsJSON) {
         nameLabel.text = group.name
+        nameLabel.numberOfLines = 0
+
+        myImage.sd_setImage(with: URL(string: group.photoURL), placeholderImage: UIImage())
         
-        if group.discription != nil {
-            ageLabel.text = group.discription
-        }
-        
-        if let image = group.groupImage {
-            myImage.image = image
-            myImage.layer.cornerRadius = 80
-            
-        }
-        
-        myView.layer.cornerRadius = 80
+        myImage.layer.cornerRadius = 50
+        myView.layer.cornerRadius = 50
         myView.layer.shadowColor = UIColor.systemRed.cgColor
         myView.layer.shadowRadius = 15
         myView.layer.shadowOpacity = 0.7

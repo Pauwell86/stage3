@@ -12,7 +12,7 @@ private let reuseIdentifier = "Cell"
 
 class FotoCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    var user: User?
+    var user: UserJSON?
     var fotosArray = [UIImage]()
     var photosFriends = VKService()
     let countCells = 2
@@ -25,7 +25,7 @@ class FotoCollectionViewController: UICollectionViewController, UICollectionView
         self.collectionView.register(UINib(nibName: "FotoCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: FotoCollectionViewCellReuse)
         
         guard let _ = user,
-              let userID = user?.userID
+              let userID = user?.id
         else { return }
         
         DataStorage.shared.userID = userID
