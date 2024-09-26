@@ -58,6 +58,7 @@ class MyTableViewCell: UITableViewCell {
     
     
     func configureWithUser(user: User) {
+        
         nameLabel.text = user.name
         
         if let age = user.age {
@@ -77,8 +78,6 @@ class MyTableViewCell: UITableViewCell {
 
         saveUser = user
     
-        
-
     }
     
     func configureWithGroup(group: Group) {
@@ -103,8 +102,6 @@ class MyTableViewCell: UITableViewCell {
                 
     }
     
-
-//    @IBAction func pressButton(_ sender: Any) {
     
 func animeAvatar() {
     let anime = CASpringAnimation(keyPath: "transform.scale")

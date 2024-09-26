@@ -53,22 +53,8 @@ class MyTabBarController: UITabBarController {
         
     }
     
-    var friensInfo = [Item]()
-    var friendsService = VKService()
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         fillUsersArray()
-        
-        friendsService.loadFriends() { [weak self] users in
-
-            self?.friensInfo = users
-            print(self!.friensInfo[3])
-
-        }
-
-
     }
- }
-
+}

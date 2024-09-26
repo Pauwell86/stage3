@@ -6,5 +6,8 @@ target 'VK' do
   use_frameworks!
 
   # Pods for VK
- pod "Alamofire"
+ pod 'Alamofire'
+ pod 'RealmSwift'
+ pod 'SwiftKeychainWrapper'
+ pod 'SDWebImage'
 end

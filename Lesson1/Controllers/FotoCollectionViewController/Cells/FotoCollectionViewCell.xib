@@ -11,17 +11,17 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleAspectFill" id="gTV-IL-0wX" customClass="FotoCollectionViewCell" customModule="VK" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="200" height="247"/>
+            <rect key="frame" x="0.0" y="0.0" width="200" height="235"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="200" height="247"/>
+                <rect key="frame" x="0.0" y="0.0" width="200" height="235"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vXE-oq-J4G">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="206"/>
+                        <rect key="frame" x="2" y="0.0" width="196" height="197"/>
                     </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="3" id="ROI-W6-Bno">
-                        <rect key="frame" x="7" y="206" width="35" height="30"/>
+                        <rect key="frame" x="7" y="197" width="35" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dgV-1z-TEY">
@@ -54,19 +54,19 @@
             </view>
             <viewLayoutGuide key="safeArea" id="8w9-7M-m4C"/>
             <constraints>
-                <constraint firstItem="ROI-W6-Bno" firstAttribute="top" secondItem="vXE-oq-J4G" secondAttribute="bottom" id="AUB-Vn-AN9"/>
-                <constraint firstAttribute="trailing" secondItem="vXE-oq-J4G" secondAttribute="trailing" id="OMn-Yy-Mwf"/>
-                <constraint firstItem="vXE-oq-J4G" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="dUP-zS-gKH"/>
+                <constraint firstItem="ROI-W6-Bno" firstAttribute="top" secondItem="vXE-oq-J4G" secondAttribute="bottom" id="0aX-GZ-FJQ"/>
+                <constraint firstAttribute="trailing" secondItem="vXE-oq-J4G" secondAttribute="trailing" constant="2" id="OMn-Yy-Mwf"/>
+                <constraint firstItem="vXE-oq-J4G" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="2" id="dUP-zS-gKH"/>
                 <constraint firstItem="vXE-oq-J4G" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="vvI-Yz-2VD"/>
             </constraints>
-            <size key="customSize" width="100" height="166"/>
+            <size key="customSize" width="100" height="154"/>
             <connections>
                 <outlet property="fotoImage" destination="vXE-oq-J4G" id="kmh-bv-Fbc"/>
                 <outlet property="likeButton" destination="CJZ-iG-F0y" id="T5b-JL-Vi1"/>
                 <outlet property="likeLabel" destination="dgV-1z-TEY" id="Xbc-CE-Oi2"/>
                 <outlet property="likeStackView" destination="ROI-W6-Bno" id="WtQ-az-VO4"/>
             </connections>
-            <point key="canvasLocation" x="168.11594202898553" y="74.665178571428569"/>
+            <point key="canvasLocation" x="168.11594202898553" y="70.647321428571431"/>
         </collectionViewCell>
     </objects>
     <resources>
